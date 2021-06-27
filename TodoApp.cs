@@ -10,9 +10,39 @@ namespace TodoCLI
 
         public void Print()
         {
+            int computeGreatestLength ()
+            {
+                List<int> stringLength = new List<int> { };
+                Index last = ^1;
+                foreach (TodoItem item in TodoList)
+                {
+                    stringLength.Add(item.Todo.Length);
+                }
+                stringLength.Sort();
+                return stringLength[last];
+            }
+
+            int greatestTodoStringLength = computeGreatestLength();
+
+            string computeSpaceRequired(string todo)
+            {
+                int stringLengthDifference = greatestTodoStringLength - todo.Length;
+                string spaceRequired = "";
+
+                for(int i = 0; i < stringLengthDifference; i ++)
+                {
+                    spaceRequired += " ";
+                }
+
+                return spaceRequired;
+            }
+            
             foreach (TodoItem todo in TodoList)
             {
-                Console.WriteLine($"|{todo.Id} \t| {todo.Todo} \t| {todo.Completed}");
+                string printedString =
+                $"|{todo.Id} \t| {todo.Todo} {computeSpaceRequired(todo.Todo)}| {todo.Completed}";
+
+                Console.WriteLine(printedString);
             }
         }
 
@@ -30,6 +60,46 @@ namespace TodoCLI
                     item.Completed = true;
                 }
             }
+        }
+
+        public void CommandInterface ()
+        {
+            void AddItemProcedure ()
+            {
+                Console.WriteLine("What would you like to add to your list of Todos?");
+                string n = Console.ReadLine();
+                AddTodo(n);
+            }
+
+            List<string> Actions = new List<string>
+            {
+                "1. Add Item Todo",
+                "2. Print All Todo Items",
+                "3. Remove A Todo"
+            };
+            Console.WriteLine("Welcome to the most perverted TODO CLI");
+            Console.WriteLine("Respond with the preceeding number to perform an action");
+
+            foreach (string action in Actions)
+            {
+                Console.WriteLine(action);
+            }
+
+            string action_ = Console.ReadLine();
+
+            switch (action_)
+            {
+                case "1":
+                    AddItemProcedure();
+                    break;
+                case "3":
+                    Print();
+                    break;
+                default:
+                    Console.WriteLine("Invalid command");
+                    break;
+            }
+
         }
 
     }
