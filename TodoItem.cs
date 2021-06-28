@@ -6,7 +6,6 @@ namespace TodoCLI
 {
     class TodoItem
     {
-        //private static int _id { get; set; } = 0;'
         private string _todo;
         private bool _completed { get; set; } = false;
 
