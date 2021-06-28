@@ -9,12 +9,15 @@ namespace TodoCLI
         private string _todo;
         private bool _completed { get; set; } = false;
 
+        private int _id = 0;
+
         public TodoItem(string todo)
         {
             _todo = todo;
+            _id = Counter.GetNextValue();
         }
 
-        public int Id => Counter.GetNextValue();
+        public int Id => _id;
 
         public string Todo
         {
