@@ -75,7 +75,8 @@ namespace TodoCLI
             {
                 "1. Add Item Todo",
                 "2. Print All Todo Items",
-                "3. Remove A Todo"
+                "3. Remove A Todo",
+                "4. Terminate Application"
             };
             Console.WriteLine("Welcome to the most perverted TODO CLI");
             Console.WriteLine("Respond with the preceeding number to perform an action");
@@ -91,6 +92,7 @@ namespace TodoCLI
             {
                 case "1":
                     AddItemProcedure();
+                    Print();
                     break;
                 case "3":
                     Print();
